@@ -6,6 +6,10 @@
  * @param {String} songId - the ID of the song to play
  */
 function playSong(songId) {
+    let otherSongs = document.getElementsByClassName('songShell');
+    for(let otherSong of otherSongs){
+        otherSong.style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }
     document.getElementById(songId).style.backgroundColor = "red";
     // Your code here
 }
@@ -50,9 +54,25 @@ function createPlaylistElement({ id, name, songs }) {
     const children = []
     const classes = []
     const attrs = {}
+    let playlistDiv = document.getElementById("playlists");
+    let uniquePlaylistDiv = document.createElement('div');
+    uniquePlaylistDiv.setAttribute('class', 'playlistShell');
+    uniquePlaylistDiv.setAttribute('name', name);
+    let playlistName = document.createElement('h1');
+    let playlistSongs = document.createElement('h2');
+    let playlistTotalDuration = document.createElement('p');
+    playlistName.innerText = name + "-playlist";
+    playlistSongs.innerText = "amount of songs: " + songs.length;
+    playlistTotalDuration.innerText = "duration - " + playlistDuration(id);
+    playlistDiv.appendChild(uniquePlaylistDiv);
+    uniquePlaylistDiv.appendChild(playlistName);
+    uniquePlaylistDiv.appendChild(playlistSongs);
+    uniquePlaylistDiv.appendChild(playlistTotalDuration);
     return createElement("div", children, classes, attrs)
 }
-
+for(let playlist of player.playlists){
+    createPlaylistElement(playlist);
+}
 /**
  * Creates a new DOM element.
  *

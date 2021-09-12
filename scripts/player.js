@@ -62,7 +62,7 @@ const player = {
         { id: 5, name: "Israeli", songs: [4, 5] },
     ],
 }
-
+//
 function secondsToMinutesConvertor(songDuration){
     let durationInMinutes = songDuration / 60;
     let minutes = 0;
@@ -83,3 +83,37 @@ function secondsToMinutesConvertor(songDuration){
     lengthFormat = minutes + ":" + seconds
     return lengthFormat
   }
+  //getting a song object from an song id
+  function getSongObjectById(id){
+    let song = player.songs.filter(songObject => {
+        if(songObject.id === id){
+          return songObject;
+        }
+      })
+      if(song.length == false){
+        throw "undefined id";
+      }
+      song = song[0];
+      return song;
+}
+
+// get playlist by id function
+  function getPlaylistById(id){
+    let playlistById = player.playlists.filter(playlist =>{
+        if(playlist.id === id){
+          return playlist;
+        }
+      })
+      return playlistById[0];
+    }
+    //playlist duration function
+  function playlistDuration(id) {
+    let requestedPlaylist = getPlaylistById(id);
+    let songsLengthsArray = requestedPlaylist.songs.map(song => {
+    return getSongObjectById(song).duration})
+    let totalDuration = (songsLengthsArray.reduce((acc, value) => {
+      acc += value;
+      return acc;
+    }))
+    return secondsToMinutesConvertor(totalDuration);
+    }

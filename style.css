@@ -35,3 +35,24 @@ overflow: auto;
   padding: 0, 0;
   margin: 0, 0;
 }
+
+.playlistShell {
+    border: thin solid black;
+    border-radius: 10%;
+    align-items: center;
+    margin: 20px;
+    height: 15vh;
+    overflow: auto;
+}
+
+.playlistShell h1 {
+    text-align: center;
+    color: cornflowerblue;
+    text-decoration: none;
+    margin: 0;
+}
+.playlistShell h2, .playlistShell p{
+    display: inline;
+    padding: 5px;
+    margin-top: 5px;
+}
