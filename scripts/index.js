@@ -1,10 +1,12 @@
 /**
+ * 
  * Plays a song from the player.
  * Playing a song means changing the visual indication of the currently playing song.
  *
  * @param {String} songId - the ID of the song to play
  */
 function playSong(songId) {
+    document.getElementById(songId).style.backgroundColor = "red";
     // Your code here
 }
 
@@ -12,12 +14,35 @@ function playSong(songId) {
  * Creates a song DOM element based on a song object.
  */
 function createSongElement({ id, title, album, artist, duration, coverArt }) {
-    const children = []
-    const classes = []
+    const children = [];
+    const classes = [];
+    const songsDiv = document.getElementById("songs");
+    let uniqueSongDiv = document.createElement('div');
+    uniqueSongDiv.setAttribute('class', 'songShell');
+    uniqueSongDiv.setAttribute('id',id);
+    let songTitle = document.createElement('h1');
+    let songAlbum = document.createElement('h2');
+    let songArtist = document.createElement('h2');
+    let songDuration = document.createElement('p');
+    let songCoverArt = document.createElement('img');
+        songTitle.innerText = title;
+        songAlbum.innerText = "album: " + album;
+        songArtist.innerText = "by: " + artist;
+        songDuration.innerText = secondsToMinutesConvertor(duration);
+        songCoverArt.setAttribute('src' , coverArt);
+        songsDiv.appendChild(uniqueSongDiv);
+        uniqueSongDiv.appendChild(songTitle);
+        uniqueSongDiv.appendChild(songAlbum);
+        uniqueSongDiv.appendChild( songArtist);
+        uniqueSongDiv.appendChild( songDuration);
+        uniqueSongDiv.appendChild(songCoverArt);
+        uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
     const attrs = { onclick: `playSong(${id})` }
     return createElement("div", children, classes, attrs)
 }
-
+for(let song of player.songs){
+    createSongElement(song);
+}
 /**
  * Creates a playlist DOM element based on a playlist object.
  */

@@ -62,3 +62,24 @@ const player = {
         { id: 5, name: "Israeli", songs: [4, 5] },
     ],
 }
+
+function secondsToMinutesConvertor(songDuration){
+    let durationInMinutes = songDuration / 60;
+    let minutes = 0;
+    let seconds = 0;
+    let lengthFormat = 0;
+    minutes = Math.floor(durationInMinutes);
+    if(minutes < 10 && minutes > 0){
+      minutes = "0" + minutes.toString();
+    }else{
+      minutes = minutes.toString();
+    }
+    seconds = (Math.round((durationInMinutes - minutes) * 60));
+    if( seconds < 10 && seconds > 0){
+      seconds = "0" + seconds.toString();
+    }else{
+      seconds = seconds.toString();
+    }
+    lengthFormat = minutes + ":" + seconds
+    return lengthFormat
+  }
