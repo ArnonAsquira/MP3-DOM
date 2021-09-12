@@ -11,6 +11,10 @@ function playSong(songId) {
         otherSong.style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
     document.getElementById(songId).style.backgroundColor = "red";
+
+    if(songId < 7){
+        window.setTimeout(function(){playSong(songId + 1);} ,getSongObjectById(songId).duration * 1000);
+    }
     // Your code here
 }
 
