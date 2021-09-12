@@ -117,3 +117,10 @@ function secondsToMinutesConvertor(songDuration){
     }))
     return secondsToMinutesConvertor(totalDuration);
     }
+      // converts string minutes format to secoonds
+  function convertToseconds(durationInMinutes){
+    let minutes = Number(durationInMinutes.split("").slice(0, 2).join(""));
+    let seconds = Number(durationInMinutes.split("").slice(3, 5).join(""));
+    let totalTime = (minutes * 60) + seconds;
+    return totalTime
+}

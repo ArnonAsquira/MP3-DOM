@@ -90,3 +90,9 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 }
 
 // You can write more code below this line
+let songDuration = document.querySelectorAll(".songShell p");
+let SongDurationArray = Array.from(songDuration);
+for(let i = 0; i < SongDurationArray.length; i++){
+    let redAmount = player.songs[i].duration;
+    SongDurationArray[i].style.color = ("rgb(" + redAmount * 0.74 + ","+(100000/redAmount)+ ",0)");
+}
