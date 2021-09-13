@@ -23,7 +23,7 @@ function playSong(songId) {
  */
 function createSongElement({ id, title, album, artist, duration, coverArt }) {
         let SongTitle = createElement('h1', children = [title], classes = ['songTitles'], attributes = {});
-        let songAlbum = createElement('h2', children = ["ablbum: " + album], classes = [], attributes = {});
+        let songAlbum = createElement('h2', children = ["album: " + album], classes = [], attributes = {});
         let songArtist = createElement('h2', children = ["by: " + artist], classes = [], attributes = {});
         let songDuration = createElement('span', children = [secondsToMinutesConvertor(duration)], classes = [], attributes = {});
         let songCoverArt  = createElement('img', children = [], classes = [], attributes = {src: coverArt})
