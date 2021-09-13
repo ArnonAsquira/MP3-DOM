@@ -83,9 +83,9 @@ function createElement(tagName, children = [], classes = [], attributes = {}) {
 console.log(createSongElement('h1', [player.songs[0].title], "songTitles"));
 
 // You can write more code below this line
-let songDuration = document.querySelectorAll(".songShell p");
+let songDuration = document.querySelectorAll(".songShell span");
 let SongDurationArray = Array.from(songDuration);
 for(let i = 0; i < SongDurationArray.length; i++){
     let redAmount = player.songs[i].duration;
-    SongDurationArray[i].style.color = ("rgb(" + redAmount * 0.8 + ","+(100000/redAmount)+ ",0)");
+    SongDurationArray[i].style.color = `rgb( ${(redAmount * 0.8533) - 120} , ${420 - (redAmount * 0.8533)} ,0)`;
 }

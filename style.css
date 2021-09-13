@@ -28,7 +28,7 @@ overflow: auto;
     text-decoration: none;
     margin: 0;
 }
-.songShell h2, .songShell p{
+.songShell h2, .songShell span{
     display: inline;
     padding: 10px;
     margin-top: 10px;
