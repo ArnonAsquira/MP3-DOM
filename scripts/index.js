@@ -22,28 +22,6 @@ function playSong(songId) {
  * Creates a song DOM element based on a song object.
  */
 function createSongElement({ id, title, album, artist, duration, coverArt }) {
-    /* const children = [];
-    const classes = []; */
-    /* const songsDiv = document.getElementById("songs");
-    let uniqueSongDiv = document.createElement('div');
-    uniqueSongDiv.setAttribute('class', 'songShell');
-    uniqueSongDiv.setAttribute('id',id);
-    let songTitle = document.createElement('h1');
-    let songAlbum = document.createElement('h2');
-    let songArtist = document.createElement('h2');
-    let songDuration = document.createElement('p');
-    let songCoverArt = document.createElement('img');
-        songTitle.innerText = title;
-        songAlbum.innerText = "album: " + album;
-        songArtist.innerText = "by: " + artist;
-        songDuration.innerText = secondsToMinutesConvertor(duration);
-        songCoverArt.setAttribute('src' , coverArt);
-        songsDiv.appendChild(uniqueSongDiv);
-        uniqueSongDiv.appendChild(songTitle);
-        uniqueSongDiv.appendChild(songAlbum);
-        uniqueSongDiv.appendChild( songArtist);
-        uniqueSongDiv.appendChild( songDuration);
-        uniqueSongDiv.appendChild(songCoverArt); */
         let SongTitle = createElement('h1', children = [title], classes = ['songTitles'], attributes = {});
         let songAlbum = createElement('h2', children = ["ablbum: " + album], classes = [], attributes = {});
         let songArtist = createElement('h2', children = ["by: " + artist], classes = [], attributes = {});
@@ -63,28 +41,15 @@ for(let song of player.songs){
  * Creates a playlist DOM element based on a playlist object.
  */
 function createPlaylistElement({ id, name, songs }) {
-    const children = []
-    const classes = []
-    const attrs = {}
-    let playlistDiv = document.getElementById("playlists");
-    let uniquePlaylistDiv = document.createElement('div');
-    uniquePlaylistDiv.setAttribute('class', 'playlistShell');
-    uniquePlaylistDiv.setAttribute('name', name);
-    let playlistName = document.createElement('h1');
-    let playlistSongs = document.createElement('h2');
-    let playlistTotalDuration = document.createElement('p');
-    playlistName.innerText = name + "-playlist";
-    playlistSongs.innerText = "amount of songs: " + songs.length;
-    playlistTotalDuration.innerText = "duration - " + playlistDuration(id);
-    playlistDiv.appendChild(uniquePlaylistDiv);
-    uniquePlaylistDiv.appendChild(playlistName);
-    uniquePlaylistDiv.appendChild(playlistSongs);
-    uniquePlaylistDiv.appendChild(playlistTotalDuration);
-
-    return createElement("div", children, classes, attrs)
+    let playlistName = createElement('h1', children = [name + "-playlist"], classes = [], attributes = {});
+    let playlistSongs = createElement('h2', children = ["amount of songs: " + songs.length], classes = [], attributes = {});
+    let playlistTotalDuration = createElement('span', children = ["duration - " + playlistDuration(id)], classes = [], attributes = {});
+    let uniquePlaylistDiv = createElement('div', children = [playlistName, playlistSongs, playlistTotalDuration], classes = ['playlistShell'], attributes = {});
+    return uniquePlaylistDiv;
 }
 for(let playlist of player.playlists){
-    createPlaylistElement(playlist);
+    let playlistDiv = document.getElementById('playlists');
+     playlistDiv.append(createPlaylistElement(playlist));
 }
 /**
  * Creates a new DOM element.
