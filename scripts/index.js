@@ -22,9 +22,9 @@ function playSong(songId) {
  * Creates a song DOM element based on a song object.
  */
 function createSongElement({ id, title, album, artist, duration, coverArt }) {
-    const children = [];
-    const classes = [];
-    const songsDiv = document.getElementById("songs");
+    /* const children = [];
+    const classes = []; */
+    /* const songsDiv = document.getElementById("songs");
     let uniqueSongDiv = document.createElement('div');
     uniqueSongDiv.setAttribute('class', 'songShell');
     uniqueSongDiv.setAttribute('id',id);
@@ -43,13 +43,21 @@ function createSongElement({ id, title, album, artist, duration, coverArt }) {
         uniqueSongDiv.appendChild(songAlbum);
         uniqueSongDiv.appendChild( songArtist);
         uniqueSongDiv.appendChild( songDuration);
-        uniqueSongDiv.appendChild(songCoverArt);
+        uniqueSongDiv.appendChild(songCoverArt); */
+        let SongTitle = createElement('h1', children = [title], classes = ['songTitles'], attributes = {});
+        let songAlbum = createElement('h2', children = ["ablbum: " + album], classes = [], attributes = {});
+        let songArtist = createElement('h2', children = ["by: " + artist], classes = [], attributes = {});
+        let songDuration = createElement('span', children = [secondsToMinutesConvertor(duration)], classes = [], attributes = {});
+        let songCoverArt  = createElement('img', children = [], classes = [], attributes = {src: coverArt})
+        let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt], classes = ['songShell'], attributes = {id: id});
+        console.log(uniqueSongDiv);
         uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
-    const attrs = { onclick: `playSong(${id})` }
-    return createElement("div", children, classes, attrs)
-}
+        const attrs = { onclick: `playSong(${id})` } 
+        return uniqueSongDiv;
+    }
 for(let song of player.songs){
-    createSongElement(song);
+    let songsDiv = document.getElementById('songs');
+    songsDiv.append(createSongElement(song));
 }
 /**
  * Creates a playlist DOM element based on a playlist object.
@@ -72,6 +80,7 @@ function createPlaylistElement({ id, name, songs }) {
     uniquePlaylistDiv.appendChild(playlistName);
     uniquePlaylistDiv.appendChild(playlistSongs);
     uniquePlaylistDiv.appendChild(playlistTotalDuration);
+
     return createElement("div", children, classes, attrs)
 }
 for(let playlist of player.playlists){
@@ -90,13 +99,28 @@ for(let playlist of player.playlists){
  * @param {Object} attributes - the attributes for the new element
  */
 function createElement(tagName, children = [], classes = [], attributes = {}) {
-    // Your code here
+  let newEl = document.createElement(tagName);
+  for(let child of children){
+      if(typeof(child) === "string"){
+          child = document.createTextNode(child);
+      }
+       newEl.append(child);
+  }
+  for(let cls of classes){
+      newEl.classList.add(cls);
+  }
+  for(let attr in attributes){
+      newEl.setAttribute(attr, attributes[attr]);
+  }
+
+  return newEl
 }
+console.log(createSongElement('h1', [player.songs[0].title], "songTitles"));
 
 // You can write more code below this line
 let songDuration = document.querySelectorAll(".songShell p");
 let SongDurationArray = Array.from(songDuration);
 for(let i = 0; i < SongDurationArray.length; i++){
     let redAmount = player.songs[i].duration;
-    SongDurationArray[i].style.color = ("rgb(" + redAmount * 0.74 + ","+(100000/redAmount)+ ",0)");
+    SongDurationArray[i].style.color = ("rgb(" + redAmount * 0.8 + ","+(100000/redAmount)+ ",0)");
 }
