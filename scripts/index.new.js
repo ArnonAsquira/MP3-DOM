@@ -47,22 +47,36 @@ function handleAddSongEvent(event) {
  * Creates a song DOM element based on a song object.
  */
 function createSongElement({ id, title, album, artist, duration, coverArt }) {
-    const children = []
-    const classes = []
-    const attrs = {}
+    let SongTitle = createElement('h1', children = [title], classes = ['songTitles'], attributes = {});
+    let songAlbum = createElement('h2', children = ["album: " + album], classes = [], attributes = {});
+    let songArtist = createElement('h2', children = ["by: " + artist], classes = [], attributes = {});
+    let songDuration = createElement('span', children = [secondsToMinutesConvertor(duration)], classes = [], attributes = {});
+    let songCoverArt  = createElement('img', children = [], classes = [], attributes = {src: coverArt})
+    let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt], classes = ['songShell'], attributes = {id: id});
+    console.log(uniqueSongDiv);
+    uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
+    const attrs = { onclick: `playSong(${id})` } 
     const eventListeners = {}
-    return createElement("div", children, classes, attrs, eventListeners)
+    return uniqueSongDiv;
 }
-
+for(let song of player.songs){
+    let songsDiv = document.getElementById('songs');
+    songsDiv.append(createSongElement(song));
+}
 /**
  * Creates a playlist DOM element based on a playlist object.
  */
 function createPlaylistElement({ id, name, songs }) {
-    const children = []
-    const classes = []
-    const attrs = {}
+    let playlistName = createElement('h1', children = [name + "-playlist"], classes = [], attributes = {});
+    let playlistSongs = createElement('h2', children = ["amount of songs: " + songs.length], classes = [], attributes = {});
+    let playlistTotalDuration = createElement('span', children = ["duration - " + playlistDuration(id)], classes = [], attributes = {});
+    let uniquePlaylistDiv = createElement('div', children = [playlistName, playlistSongs, playlistTotalDuration], classes = ['playlistShell'], attributes = {});
     const eventListeners = {}
-    return createElement("div", children, classes, attrs, eventListeners)
+    return uniquePlaylistDiv;
+}
+for(let playlist of player.playlists){
+    let playlistDiv = document.getElementById('playlists');
+     playlistDiv.append(createPlaylistElement(playlist));
 }
 
 /**
@@ -79,7 +93,21 @@ function createPlaylistElement({ id, name, songs }) {
  * @param {Object} eventListeners - the event listeners on the element
  */
 function createElement(tagName, children = [], classes = [], attributes = {}, eventListeners = {}) {
-    // Your code here
+    let newEl = document.createElement(tagName);
+  for(let child of children){
+      if(typeof(child) === "string"){
+          child = document.createTextNode(child);
+      }
+       newEl.append(child);
+  }
+  for(let cls of classes){
+      newEl.classList.add(cls);
+  }
+  for(let attr in attributes){
+      newEl.setAttribute(attr, attributes[attr]);
+  }
+
+  return newEl
 }
 
 /**
@@ -102,3 +130,12 @@ generatePlaylists()
 
 // Making the add-song-button actually do something
 document.getElementById("add-button").addEventListener("click", handleAddSongEvent)
+
+
+//song duration color functionlity
+let songDuration = document.querySelectorAll(".songShell span");
+let SongDurationArray = Array.from(songDuration);
+for(let i = 0; i < SongDurationArray.length; i++){
+    let redAmount = player.songs[i].duration;
+    SongDurationArray[i].style.color = `rgb( ${(redAmount * 0.8533) - 120} , ${420 - (redAmount * 0.8533)} ,0)`;
+}
