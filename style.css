@@ -19,7 +19,7 @@ border: thin solid black;
 border-radius: 10%;
 align-items: center;
 margin: 20px;
-height: 20vh;
+height: auto;
 overflow: auto;
 }
 .songShell h1{
@@ -28,7 +28,7 @@ overflow: auto;
     text-decoration: none;
     margin: 0;
 }
-.songShell h2, .songShell p{
+.songShell h2, .songShell span{
     display: inline;
     padding: 10px;
     margin-top: 10px;
@@ -62,3 +62,4 @@ overflow: auto;
     padding: 5px;
     margin-top: 5px;
 }
+
