@@ -21,7 +21,17 @@ function removeSong(songId) {
  * Adds a song to the player, and updates the DOM to match.
  */
 function addSong({ title, album, artist, duration, coverArt }) {
-    // Your code here
+    let SongTitle = createElement('h1', children = [title], classes = ['songTitles'], attributes = {});
+    let songAlbum = createElement('h2', children = ["album: " + album], classes = [], attributes = {});
+    let songArtist = createElement('h2', children = ["by: " + artist], classes = [], attributes = {});
+    let songDuration = createElement('span', children = [duration], classes = [], attributes = {});
+    let songCoverArt  = createElement('img', children = [], classes = [], attributes = {src: coverArt})
+    let playButton = createElement('button', children = ["🔊"], classes = ["play-button"], attributes = {type:'button'});
+    let removeButton = createElement('button', children = ["✖"], classes = ["remove-button"], attributes = {type:'button'});
+    let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt, playButton, removeButton], classes = ['songShell'], attributes = {});
+    const eventListeners = {}
+    let songsDiv = document.getElementById('songs');
+    songsDiv.append(uniqueSongDiv);
 }
 
 /**
@@ -31,9 +41,18 @@ function addSong({ title, album, artist, duration, coverArt }) {
  * @param {MouseEvent} event - the click event
  */
 function handleSongClickEvent(event) {
-    // Your code here
+    let newSongObject = {
+    'title': document.getElementsByName('title')[0].value,
+    'album': document.getElementsByName('album')[0].value,
+    'artist': document.getElementsByName('artist')[0].value,
+    'duration': document.getElementsByName('duration')[0].value,
+    'coverArt:': document.getElementsByName('cover-art')[0].value
+    }
+    console.log(newSongObject);
+    addSong(newSongObject);
 }
-
+let addButton = document.getElementById('add-button');
+addButton.addEventListener('click', handleSongClickEvent);
 /**
  * Handles a click event on the button that adds songs.
  *
@@ -52,8 +71,9 @@ function createSongElement({ id, title, album, artist, duration, coverArt }) {
     let songArtist = createElement('h2', children = ["by: " + artist], classes = [], attributes = {});
     let songDuration = createElement('span', children = [secondsToMinutesConvertor(duration)], classes = [], attributes = {});
     let songCoverArt  = createElement('img', children = [], classes = [], attributes = {src: coverArt})
-    let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt], classes = ['songShell'], attributes = {id: id});
-    console.log(uniqueSongDiv);
+    let playButton = createElement('button', children = ["🔊"], classes = ["play-button"], attributes = {type:'button'});
+    let removeButton = createElement('button', children = ["✖"], classes = ["remove-button"], attributes = {type:'button'});
+    let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt, playButton, removeButton], classes = ['songShell'], attributes = {id: id});
     uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
     const attrs = { onclick: `playSong(${id})` } 
     const eventListeners = {}
