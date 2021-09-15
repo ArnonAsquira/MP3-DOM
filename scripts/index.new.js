@@ -4,23 +4,22 @@
  *
  * @param {Number} songId - the ID of the song to play
  */
-function playSong(id) {
+function playSong(songId) {
     let otherSongs = document.getElementsByClassName('songShell');
     for(let otherSong of otherSongs){
         otherSong.style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
-    document.getElementById(id).style.backgroundColor = "red";
+    document.getElementById(songId).style.backgroundColor = "red";
 
-      /*  if(songId < 7){
+        if(songId < 7){
             window.setTimeout(function(){playSong(songId + 1);} ,getSongObjectById(songId).duration * 1000);
     }
-    */
 }
 //adding the event listener to the songs list
 let songSlist = document.getElementById('songs');
 songSlist.addEventListener('click', (e) => {if(e.target.className === 'play-button'){
- console.log(e.target);
-  playSong(e.target.parentElemnt.id)}});
+ console.log(e.target.parentElement);
+  playSong(e.target.parentElement.id)}});
 /**
  * Removes a song from the player, and updates the DOM to match.
  *
@@ -87,8 +86,8 @@ function createSongElement({ id, title, album, artist, duration, coverArt }) {
     let playButton = createElement('button', children = ["🔊"], classes = ["play-button"], attributes = {type:'button', id: `playButton${id}`});
     let removeButton = createElement('button', children = ["✖"], classes = ["remove-button"], attributes = {type:'button'});
     let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt, playButton, removeButton], classes = ['songShell'], attributes = {id: id});
-    uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
-    const attrs = { onclick: `playSong(${id})` } 
+    //uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
+    // const attrs = { onclick: `playSong(${id})` } 
     const eventListeners = {}
     return uniqueSongDiv;
 }
