@@ -18,15 +18,21 @@ function playSong(songId) {
 //adding the event listener to the songs list
 let songSlist = document.getElementById('songs');
 songSlist.addEventListener('click', (e) => {if(e.target.className === 'play-button'){
- console.log(e.target.parentElement);
-  playSong(e.target.parentElement.id)}});
+    console.log(e.target.parentElement);
+    playSong(e.target.parentElement.id)
+    }
+    else if(e.target.className === 'remove-button'){
+    removeSong(e.target.parentElement.id);
+    }
+});
 /**
  * Removes a song from the player, and updates the DOM to match.
  *
  * @param {Number} songId - the ID of the song to remove
  */
 function removeSong(songId) {
-    // Your code here
+    let removedSong = document.getElementById(songId);
+    removedSong.style = 'display: none' 
 }
 
 /**
