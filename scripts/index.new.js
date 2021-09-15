@@ -32,7 +32,27 @@ songSlist.addEventListener('click', (e) => {if(e.target.className === 'play-butt
  */
 function removeSong(songId) {
     let removedSong = document.getElementById(songId);
-    removedSong.style = 'display: none' 
+    removedSong.style = 'display: none';
+    for(let playlist of player.playlists){
+        for(let i = 0; i <= playlist.songs.length; i++){
+          if(playlist.songs[i] == songId){
+              playlist.songs.splice(i, 1);
+              console.log(playlist.songs);
+          }
+        }
+    }
+    let removePlaylists = Array.from(document.querySelectorAll('.playlistShell'));
+    for(let playlist of removePlaylists){
+        console.log(playlist);
+        playlist.style = 'display: none';
+    }
+    //generates the playlists list
+    for(let playlist of player.playlists){
+        let playlistDiv = document.getElementById('playlists');
+        playlistDiv.append(createPlaylistElement(playlist));
+        playlistDiv.style = "display: block";
+    }
+
 }
 
 /**
@@ -46,7 +66,7 @@ function addSong({ title, album, artist, duration, coverArt }) {
     let songCoverArt  = createElement('img', children = [], classes = [], attributes = {src: coverArt})
     let playButton = createElement('button', children = ["🔊"], classes = ["play-button"], attributes = {type:'button'});
     let removeButton = createElement('button', children = ["✖"], classes = ["remove-button"], attributes = {type:'button'});
-    let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt, playButton, removeButton], classes = ['songShell'], attributes = {});
+    let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt, playButton, removeButton], classes = ['songShell'], attributes = {id: `${generateId()}`});
     const eventListeners = {}
     let songsDiv = document.getElementById('songs');
     songsDiv.append(uniqueSongDiv);
@@ -110,6 +130,7 @@ function createPlaylistElement({ id, name, songs }) {
     const eventListeners = {}
     return uniquePlaylistDiv;
 }
+//generates the playlists list
 for(let playlist of player.playlists){
     let playlistDiv = document.getElementById('playlists');
      playlistDiv.append(createPlaylistElement(playlist));

@@ -124,3 +124,9 @@ function secondsToMinutesConvertor(songDuration){
     let totalTime = (minutes * 60) + seconds;
     return totalTime
 }
+
+  // generat new ID function
+  function generateId(){
+        let newId = (player.songs.length + 1);
+    return newId;
+}
