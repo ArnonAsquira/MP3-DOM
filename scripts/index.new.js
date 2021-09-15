@@ -10,9 +10,9 @@ function playSong(songId) {
         otherSong.style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
     document.getElementById(songId).style.backgroundColor = "red";
-
+     console.log(songId);
         if(songId < 7){
-            window.setTimeout(function(){playSong(songId + 1);} ,getSongObjectById(songId).duration * 1000);
+            window.setTimeout(function(){playSong(Number(songId) + 1);} ,getSongObjectById(songId).duration * 1000);
     }
 }
 //adding the event listener to the songs list
@@ -86,8 +86,6 @@ function createSongElement({ id, title, album, artist, duration, coverArt }) {
     let playButton = createElement('button', children = ["🔊"], classes = ["play-button"], attributes = {type:'button', id: `playButton${id}`});
     let removeButton = createElement('button', children = ["✖"], classes = ["remove-button"], attributes = {type:'button'});
     let uniqueSongDiv = createElement('div', children = [SongTitle, songAlbum, songArtist, songDuration, songCoverArt, playButton, removeButton], classes = ['songShell'], attributes = {id: id});
-    //uniqueSongDiv.setAttribute('onclick', `playSong(${id})`)
-    // const attrs = { onclick: `playSong(${id})` } 
     const eventListeners = {}
     return uniqueSongDiv;
 }
