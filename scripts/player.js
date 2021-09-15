@@ -86,16 +86,16 @@ function secondsToMinutesConvertor(songDuration){
   //getting a song object from an song id
   function getSongObjectById(id){
     let song = player.songs.filter(songObject => {
-        if(songObject.id === id){
+        if(songObject.id == id){
           return songObject;
         }
       })
-      if(song.length == false){
+       if(song.length == undefined){
         throw "undefined id";
       }
       song = song[0];
       return song;
-}
+} 
 
 // get playlist by id function
   function getPlaylistById(id){
@@ -123,4 +123,10 @@ function secondsToMinutesConvertor(songDuration){
     let seconds = Number(durationInMinutes.split("").slice(3, 5).join(""));
     let totalTime = (minutes * 60) + seconds;
     return totalTime
+}
+
+  // generat new ID function
+  function generateId(){
+        let newId = (player.songs.length + 1);
+    return newId;
 }
